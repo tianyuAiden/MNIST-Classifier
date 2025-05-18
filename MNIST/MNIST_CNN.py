@@ -13,16 +13,16 @@ class MNIST_CNN(nn.Module):
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
 
         # maxPool
-        self.pool1 = nn.MaxPool2d(2, 2)
+        self.pool = nn.MaxPool2d(2, 2)
 
         # linear
         self.fc1 = nn.Linear(64 * 14 * 14, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
-        x = self.pool1(F.relu(self.conv1(x)))
-        x = self.pool2(F.relu(self.conv2(x)))
-
+        x = self.pool(F.relu(self.conv1(x)))  # 28*28--> 14*14
+        x = self.pool(F.relu(self.conv2(x)))  #14*14--> 7*7
+        # relu是激活函数
         x = x.view(-1, 64 * 7 * 7)
 
         x = F.relu(self.fc1(x))
