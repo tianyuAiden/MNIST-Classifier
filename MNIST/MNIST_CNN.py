@@ -16,7 +16,7 @@ class MNIST_CNN(nn.Module):
         self.pool = nn.MaxPool2d(2, 2)
 
         # linear
-        self.fc1 = nn.Linear(64 * 14 * 14, 128)
+        self.fc1 = nn.Linear(64 * 7 * 7, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
